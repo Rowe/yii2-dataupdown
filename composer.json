@@ -1,0 +1,24 @@
+{
+    "name": "rowe/yii2-data-updown",
+    "description": "Yii2数据导出导入扩展",
+    "keywords": [
+        "yii2","data","export","import","excel"
+    ],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rowe",
+            "email": "vinnie.rowe@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "rowe\\dataupdown\\": "src"
+        }
+    }
+}
