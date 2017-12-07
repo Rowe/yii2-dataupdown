@@ -25,7 +25,6 @@ abstract class DataReader extends BaseObject
         if (!file_exists($this->source)) {
             throw new InvalidConfigException('the source file is not exist');
         }
-        $this->load();
     }
 
     /**
@@ -45,16 +44,16 @@ abstract class DataReader extends BaseObject
     }
 
 
-    /**
-     *
-     */
     public function load()
     {
         $data = $this->loadData();
+
         $this->setData($data);
     }
 
     abstract function loadData();
+
+    abstract function getTitles();
 
 
 }

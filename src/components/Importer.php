@@ -45,40 +45,47 @@ class Importer extends Component
 
     public function save()
     {
-        $importData = $this->getDataReader()->getData();
+        $this->getDataReader()->load();
+        if ($this->checkData()) {
+            $importData = $this->getDataReader()->getData();
 
-        foreach ($importData as $row) {
-            $model = new $this->modelClass;
-            foreach ($row as $title => $col) {
-                $attributeName = array_search($title, $this->rules);
-                if ($attributeName) {
-                    $model->setAttribute($attributeName, $col);
+            foreach ($importData as $row) {
+                $model = new $this->modelClass;
+                foreach ($row as $title => $col) {
+                    $attributeName = array_search($title, $this->rules);
+                    if ($attributeName) {
+                        $model->setAttribute($attributeName, $col);
+                    }
                 }
+                $model->save();
             }
-            $model->save();
-            print_r('<pre>');
-            print_r($model->getErrors());
         }
     }
 
+    public function checkData()
+    {
+        return true;
+    }
 
     public function getModel()
     {
         if ($this->_model === null) {
-            return Yii::createObject([
+            $this->_model = Yii::createObject([
                 'class' => $this->modelClass
             ]);
-        } else return $this->_model;
+        }
+        return $this->_model;
     }
 
     public function getDataReader()
     {
         if ($this->_dataReader === null) {
-            return Yii::createObject([
+            $this->_dataReader = Yii::createObject([
                 'class' => $this->dataReaderClass,
                 'source' => $this->sourcePath,
             ]);
-        } else return $this->_dataReader;
+        }
+        return $this->_dataReader;
     }
 
 

@@ -43,7 +43,7 @@ class OfficeDataReader extends DataReader
      * 获取标题
      * @return array
      */
-    private function getTitles()
+    public function getTitles()
     {
         $titles = [];
         $colIndex = 0;
@@ -53,6 +53,7 @@ class OfficeDataReader extends DataReader
             $colVal = $this->getCellVal(++$colIndex, 1);
 
         }
+
         return $titles;
     }
 
